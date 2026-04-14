@@ -8,946 +8,199 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --color-bg: #FDFBF7;
-            --color-bg-alt: #F8F5F0;
-            --color-text: #1A1A1A;
-            --color-text-muted: #6B6B6B;
-            --color-text-light: #8C8C8C;
-            --color-accent: #C4652A;
-            --color-accent-hover: #A85520;
+            --color-bg: #FDFBF7; --color-bg-alt: #F8F5F0; --color-text: #1A1A1A;
+            --color-text-muted: #6B6B6B; --color-text-light: #8C8C8C;
+            --color-accent: #C4652A; --color-accent-hover: #A85520;
             --color-border: #E8E4DE;
             --font-display: 'Fraunces', Georgia, serif;
             --font-body: 'DM Sans', -apple-system, sans-serif;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(253, 251, 247, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--color-text);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: var(--color-text);
-        }
-
-        /* Page Sections */
-        .page {
-            display: none;
-            min-height: 100vh;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 10rem 2rem 6rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-tagline {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-accent);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-        }
-
-        .hero-intro {
-            font-size: 1.125rem;
-            color: var(--color-text-muted);
-            max-width: 680px;
-            line-height: 1.7;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--color-border);
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--color-text);
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            margin-top: 0.25rem;
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 400;
-        }
-
-        .section-link {
-            font-size: 0.875rem;
-            color: var(--color-accent);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .section-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Case Study Cards */
-        .case-studies-grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .case-card {
-            background: var(--color-bg-alt);
-            border-radius: 12px;
-            padding: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .case-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-            border-color: var(--color-border);
-        }
-
-        .case-card-number {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--color-text-light);
-            margin-bottom: 1rem;
-        }
-
-        .case-card-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-
-        .case-card-summary {
-            color: var(--color-text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .case-card-meta {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .case-card-tag {
-            font-size: 0.8rem;
-            color: var(--color-text-light);
-            background: var(--color-bg);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-        }
-
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .product-card {
-            background: var(--color-bg-alt);
-            border-radius: 10px;
-            padding: 2rem;
-            border: 1px solid var(--color-border);
-            transition: border-color 0.2s;
-        }
-
-        .product-card:hover {
-            border-color: var(--color-accent);
-        }
-
-        .product-card-title {
-            font-family: var(--font-display);
-            font-size: 1.125rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-card-desc {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 0.75rem;
-            line-height: 1.5;
-        }
-
-        .product-card-detail {
-            font-size: 0.8rem;
-            color: var(--color-text-light);
-            font-style: italic;
-        }
-
-        /* Side Projects */
-        .side-projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .side-project-card {
-            background: var(--color-bg-alt);
-            border-radius: 12px;
-            padding: 2.5rem;
-            border: 1px solid var(--color-border);
-        }
-
-        .side-project-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-accent);
-            background: rgba(196, 101, 42, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .side-project-title {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-        }
-
-        .side-project-desc {
-            color: var(--color-text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* About Preview */
-        .about-preview {
-            background: var(--color-bg-alt);
-            border-radius: 16px;
-            padding: 4rem;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-preview-visual {
-            display: flex;
-            justify-content: center;
-        }
-
-        .about-initials {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent) 0%, #D4845A 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 4rem;
-            color: white;
-            font-weight: 400;
-        }
-
-        .about-preview-content h2 {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-preview-content p {
-            color: var(--color-text-muted);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.875rem 1.75rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: var(--font-body);
-        }
-
-        .btn-primary {
-            background: var(--color-text);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #333;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-text);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: var(--color-text);
-            color: white;
-            padding: 5rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .contact-inner {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-inner h2 {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .contact-inner p {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .contact-btn-primary {
-            background: white;
-            color: var(--color-text);
-        }
-
-        .contact-btn-primary:hover {
-            background: var(--color-bg);
-        }
-
-        .contact-btn-secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .contact-btn-secondary:hover {
-            border-color: white;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-text {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-links a {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--color-text);
-        }
-
-        /* ========== ABOUT PAGE ========== */
-        .about-page {
-            padding-top: 5rem;
-        }
-
-        .about-layout {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 5rem;
-        }
-
-        .about-sidebar {
-            position: sticky;
-            top: 8rem;
-            height: fit-content;
-        }
-
-        .about-sidebar-initials {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent) 0%, #D4845A 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-sidebar h1 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .about-sidebar-tagline {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .about-sidebar-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .about-sidebar-link {
-            font-size: 0.9rem;
-            color: var(--color-accent);
-            text-decoration: none;
-        }
-
-        .about-sidebar-link:hover {
-            text-decoration: underline;
-        }
-
-        .about-content h2 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        .about-content p {
-            color: var(--color-text-muted);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        .about-philosophy {
-            background: var(--color-bg-alt);
-            border-left: 3px solid var(--color-accent);
-            padding: 2rem 2.5rem;
-            margin: 3rem 0;
-            border-radius: 0 12px 12px 0;
-        }
-
-        .about-philosophy p {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--color-text);
-            font-style: italic;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .about-journey {
-            margin-top: 4rem;
-        }
-
-        .about-journey h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-
-        .journey-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .journey-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 2rem;
-        }
-
-        .journey-period {
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-            font-weight: 500;
-        }
-
-        .journey-content h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .journey-content p {
-            font-size: 0.95rem;
-            color: var(--color-text-muted);
-            margin: 0;
-        }
-
-        .about-interests {
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .about-interests h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .interests-tags {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .interest-tag {
-            background: var(--color-bg-alt);
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-        }
-
-        /* ========== CASE STUDY PAGES ========== */
-        .case-study-page {
-            padding-top: 5rem;
-        }
-
-        .case-study-hero {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem 3rem;
-        }
-
-        .case-study-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            text-decoration: none;
-            margin-bottom: 2rem;
-            cursor: pointer;
-        }
-
-        .case-study-back:hover {
-            color: var(--color-text);
-        }
-
-        .case-study-hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 400;
-            line-height: 1.25;
-            margin-bottom: 1.5rem;
-        }
-
-        .case-study-hero .summary {
-            font-size: 1.2rem;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-
-        .case-study-meta {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--color-border);
-            flex-wrap: wrap;
-        }
-
-        .case-study-meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .case-study-meta-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-text-light);
-        }
-
-        .case-study-meta-value {
-            font-size: 0.95rem;
-            color: var(--color-text);
-            font-weight: 500;
-        }
-
-        .case-study-content {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 2rem 2rem 5rem;
-        }
-
-        .case-study-content h2 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-top: 3rem;
-            margin-bottom: 1.25rem;
-            color: var(--color-text);
-        }
-
-        .case-study-content p {
-            color: var(--color-text-muted);
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-        }
-
-        .case-study-content ul {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .case-study-content li {
-            color: var(--color-text-muted);
-            line-height: 1.7;
-            margin-bottom: 0.75rem;
-        }
-
-        .case-study-content li strong {
-            color: var(--color-text);
-        }
-
-        .outcome-box {
-            background: var(--color-bg-alt);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .outcome-box h3 {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--color-accent);
-        }
-
-        .outcome-box ul {
-            margin: 0;
-            padding-left: 1.25rem;
-        }
-
-        .outcome-box li {
-            margin-bottom: 0.5rem;
-        }
-
-        .decision-callout {
-            background: linear-gradient(135deg, rgba(196, 101, 42, 0.08) 0%, rgba(196, 101, 42, 0.02) 100%);
-            border-left: 3px solid var(--color-accent);
-            padding: 1.5rem 2rem;
-            margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .decision-callout p {
-            margin: 0;
-            font-style: italic;
-        }
-
-        .case-study-nav {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--color-border);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .case-study-nav-link {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .case-study-nav-link span {
-            font-size: 0.8rem;
-            color: var(--color-text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .case-study-nav-link strong {
-            color: var(--color-text);
-            font-weight: 500;
-        }
-
-        .case-study-nav-link:hover strong {
-            color: var(--color-accent);
-        }
-
-        .case-study-nav-link.next {
-            text-align: right;
-        }
-
-        /* Responsive */
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(253,251,247,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-border); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; color: var(--color-text); text-decoration: none; cursor: pointer; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 0.9rem; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+        .nav-links a:hover { color: var(--color-text); }
+        .page { display: none; min-height: 100vh; }
+        .page.active { display: block; }
+        .hero { padding: 10rem 2rem 6rem; max-width: 900px; margin: 0 auto; }
+        .hero-tagline { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: 1.5rem; }
+        .hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; margin-bottom: 2rem; }
+        .hero-intro { font-size: 1.125rem; color: var(--color-text-muted); max-width: 680px; line-height: 1.7; }
+        .hero-stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+        .stat { display: flex; flex-direction: column; }
+        .stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 500; }
+        .stat-label { font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+        .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+        .section-title { font-family: var(--font-display); font-size: 1.75rem; font-weight: 400; }
+        .case-studies-grid { display: grid; gap: 2rem; }
+        .case-card { background: var(--color-bg-alt); border-radius: 12px; padding: 2.5rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid transparent; }
+        .case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: var(--color-border); }
+        .case-card.featured { border: 1px solid rgba(196,101,42,0.3); background: linear-gradient(135deg, #FDF8F4 0%, #F8F5F0 100%); }
+        .case-card-number { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-text-light); margin-bottom: 1rem; }
+        .case-card-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: 0.75rem; line-height: 1.3; }
+        .case-card-summary { color: var(--color-text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .case-card-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .case-card-tag { font-size: 0.8rem; color: var(--color-text-light); background: var(--color-bg); padding: 0.4rem 0.8rem; border-radius: 4px; }
+        .case-card-tag.highlight { background: rgba(196,101,42,0.1); color: var(--color-accent); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .product-card { background: var(--color-bg-alt); border-radius: 10px; padding: 2rem; border: 1px solid var(--color-border); transition: border-color 0.2s; }
+        .product-card:hover { border-color: var(--color-accent); }
+        .product-card-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .product-card-desc { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 0.75rem; line-height: 1.5; }
+        .product-card-detail { font-size: 0.8rem; color: var(--color-text-light); font-style: italic; }
+        .side-projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 2rem; }
+        .side-project-card { background: var(--color-bg-alt); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--color-border); }
+        .side-project-badge { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); background: rgba(196,101,42,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; margin-bottom: 1rem; }
+        .side-project-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; margin-bottom: 0.75rem; }
+        .side-project-desc { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .about-preview { background: var(--color-bg-alt); border-radius: 16px; padding: 4rem; display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; }
+        .about-preview-visual { display: flex; justify-content: center; }
+        .about-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-border); }
+        .about-initials { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent) 0%, #D4845A 100%); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 4rem; color: white; font-weight: 400; }
+        .about-preview-content h2 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .about-preview-content p { color: var(--color-text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+        .btn { display: inline-block; padding: 0.875rem 1.75rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-family: var(--font-body); }
+        .btn-primary { background: var(--color-text); color: white; }
+        .btn-primary:hover { background: #333; }
+        .contact-section { background: var(--color-text); color: white; padding: 5rem 2rem; margin-top: 4rem; }
+        .contact-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+        .contact-inner h2 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 400; margin-bottom: 1rem; }
+        .contact-inner p { color: rgba(255,255,255,0.7); margin-bottom: 2.5rem; font-size: 1.1rem; }
+        .contact-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .contact-btn { padding: 1rem 2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+        .contact-btn-primary { background: white; color: var(--color-text); }
+        .contact-btn-primary:hover { background: var(--color-bg); }
+        .contact-btn-secondary { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+        .contact-btn-secondary:hover { border-color: white; }
+        .footer { padding: 3rem 2rem; border-top: 1px solid var(--color-border); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-text { font-size: 0.875rem; color: var(--color-text-muted); }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { font-size: 0.875rem; color: var(--color-text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--color-text); }
+        .about-page { padding-top: 5rem; }
+        .about-layout { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 280px 1fr; gap: 5rem; }
+        .about-sidebar { position: sticky; top: 8rem; height: fit-content; }
+        .about-sidebar-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-border); margin-bottom: 1.5rem; }
+        .about-sidebar-initials { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent) 0%, #D4845A 100%); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.5rem; color: white; margin-bottom: 1.5rem; }
+        .about-sidebar h1 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+        .about-sidebar-tagline { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+        .about-sidebar-links { display: flex; flex-direction: column; gap: 0.75rem; }
+        .about-sidebar-link { font-size: 0.9rem; color: var(--color-accent); text-decoration: none; }
+        .about-sidebar-link:hover { text-decoration: underline; }
+        .about-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; margin-bottom: 2rem; }
+        .about-content p { color: var(--color-text-muted); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.05rem; }
+        .about-philosophy { background: var(--color-bg-alt); border-left: 3px solid var(--color-accent); padding: 2rem 2.5rem; margin: 3rem 0; border-radius: 0 12px 12px 0; }
+        .about-philosophy p { font-family: var(--font-display); font-size: 1.25rem; color: var(--color-text); font-style: italic; margin: 0; line-height: 1.6; }
+        .about-journey { margin-top: 4rem; }
+        .about-journey h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; margin-bottom: 2rem; }
+        .journey-timeline { display: flex; flex-direction: column; gap: 2rem; }
+        .journey-item { display: grid; grid-template-columns: 100px 1fr; gap: 2rem; }
+        .journey-period { font-size: 0.85rem; color: var(--color-text-light); font-weight: 500; }
+        .journey-content h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .journey-content p { font-size: 0.95rem; color: var(--color-text-muted); margin: 0; }
+        .about-interests { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--color-border); }
+        .about-interests h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; margin-bottom: 1.5rem; }
+        .interests-tags { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .interest-tag { background: var(--color-bg-alt); padding: 0.6rem 1.2rem; border-radius: 20px; font-size: 0.9rem; color: var(--color-text-muted); }
+        .case-study-page { padding-top: 5rem; }
+        .case-study-hero { max-width: 800px; margin: 0 auto; padding: 4rem 2rem 3rem; }
+        .case-study-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-muted); text-decoration: none; margin-bottom: 2rem; cursor: pointer; }
+        .case-study-back:hover { color: var(--color-text); }
+        .case-study-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 400; line-height: 1.25; margin-bottom: 1.5rem; }
+        .case-study-hero .summary { font-size: 1.2rem; color: var(--color-text-muted); line-height: 1.6; }
+        .case-study-meta { display: flex; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+        .case-study-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+        .case-study-meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-light); }
+        .case-study-meta-value { font-size: 0.95rem; color: var(--color-text); font-weight: 500; }
+        .case-study-content { max-width: 700px; margin: 0 auto; padding: 2rem 2rem 5rem; }
+        .case-study-content h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-top: 3rem; margin-bottom: 1.25rem; }
+        .case-study-content p { color: var(--color-text-muted); line-height: 1.8; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        .case-study-content ul { margin: 1.5rem 0; padding-left: 1.5rem; }
+        .case-study-content li { color: var(--color-text-muted); line-height: 1.7; margin-bottom: 0.75rem; }
+        .case-study-content li strong { color: var(--color-text); }
+        .outcome-box { background: var(--color-bg-alt); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .outcome-box h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem; color: var(--color-accent); }
+        .outcome-box ul { margin: 0; padding-left: 1.25rem; }
+        .outcome-box li { margin-bottom: 0.5rem; }
+        .decision-callout { background: linear-gradient(135deg, rgba(196,101,42,0.08) 0%, rgba(196,101,42,0.02) 100%); border-left: 3px solid var(--color-accent); padding: 1.5rem 2rem; margin: 2rem 0; border-radius: 0 8px 8px 0; }
+        .decision-callout p { margin: 0; font-style: italic; }
+        .case-study-nav { max-width: 700px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; }
+        .case-study-nav-link { display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; cursor: pointer; }
+        .case-study-nav-link span { font-size: 0.8rem; color: var(--color-text-light); text-transform: uppercase; letter-spacing: 0.05em; }
+        .case-study-nav-link strong { color: var(--color-text); font-weight: 500; }
+        .case-study-nav-link:hover strong { color: var(--color-accent); }
+        .case-study-nav-link.next { text-align: right; }
+        .diagram-container { background: var(--color-bg-alt); border-radius: 12px; padding: 2rem; margin: 2rem 0; overflow-x: auto; }
+        .diagram-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: 1.5rem; }
+        .mockup-container { margin: 2rem 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--color-border); }
+        .mockup-container img { width: 100%; display: block; }
+        .mockup-caption { font-size: 0.85rem; color: var(--color-text-light); text-align: center; padding: 0.75rem; background: var(--color-bg-alt); font-style: italic; }
+        .what-happened-box { background: linear-gradient(135deg, rgba(196,101,42,0.06) 0%, rgba(196,101,42,0.02) 100%); border: 1px solid rgba(196,101,42,0.2); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .what-happened-box h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-accent); margin-bottom: 1rem; }
+        .what-happened-box p { color: var(--color-text-muted); margin: 0; line-height: 1.7; font-size: 1rem; }
         @media (max-width: 900px) {
-            .about-layout {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-sidebar {
-                position: static;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .about-sidebar-links {
-                flex-direction: row;
-                justify-content: center;
-            }
-
-            .about-preview {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 3rem 2rem;
-            }
-
-            .journey-item {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-
-            .side-projects-grid {
-                grid-template-columns: 1fr;
-            }
+            .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .about-sidebar { position: static; display: flex; flex-direction: column; align-items: center; text-align: center; }
+            .about-sidebar-links { flex-direction: row; justify-content: center; }
+            .about-preview { grid-template-columns: 1fr; text-align: center; padding: 3rem 2rem; }
+            .journey-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .side-projects-grid { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 600px) {
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .hero {
-                padding: 8rem 1.5rem 4rem;
-            }
-
-            .hero-stats {
-                gap: 2rem;
-            }
-
-            .section {
-                padding: 3rem 1.5rem;
-            }
-
-            .case-card {
-                padding: 1.75rem;
-            }
-
-            .contact-inner h2 {
-                font-size: 2rem;
-            }
+            .nav-links { gap: 1rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            .section { padding: 3rem 1.5rem; }
+            .case-card { padding: 1.75rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
             <a class="nav-logo" onclick="showPage('home')">Ishita Narang</a>
             <ul class="nav-links">
                 <li><a onclick="showPage('home')">Work</a></li>
                 <li><a onclick="showPage('about')">About</a></li>
-                <li><a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a></li>
+                <li><a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a></li>
                 <li><a href="mailto:ishitanarang2109@gmail.com">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- ==================== HOME PAGE ==================== -->
+    <!-- HOME -->
     <div id="page-home" class="page active">
-        <!-- Hero -->
         <section class="hero">
-            <p class="hero-tagline">Product Manager · AI × Platform × Ops</p>
-            <h1 class="hero-title">I build products where supply is messy, users are non-tech-savvy, and connectivity is unreliable.</h1>
-            <p class="hero-intro">Currently owning 6+ products on a platform serving 1.7M+ monthly active users across 10+ Indian states — from AI chatbots to field inspection tools.</p>
+            <p class="hero-tagline">Product Manager · Consumer & Platform Products</p>
+            <h1 class="hero-title">I build products people actually want to use — from zero to scale, in the messiest operational contexts.</h1>
+            <p class="hero-intro">Currently owning 6+ products on a platform serving 1.7M+ monthly active users across 10+ Indian states. Looking to bring this thinking to consumer-facing products at scale — where the user always has a choice.</p>
             <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">1.7M+</span>
-                    <span class="stat-label">Monthly Active Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">6+</span>
-                    <span class="stat-label">Products Owned</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label">Indian States</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">468K+</span>
-                    <span class="stat-label">Schools Served</span>
-                </div>
+                <div class="stat"><span class="stat-number">1.7M+</span><span class="stat-label">Monthly Active Users</span></div>
+                <div class="stat"><span class="stat-number">6+</span><span class="stat-label">Products Owned</span></div>
+                <div class="stat"><span class="stat-number">10+</span><span class="stat-label">Indian States</span></div>
+                <div class="stat"><span class="stat-number">468K+</span><span class="stat-label">Schools Served</span></div>
             </div>
         </section>
 
-        <!-- Case Studies -->
         <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Selected Work</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Selected Work</h2></div>
             <div class="case-studies-grid">
+                <article class="case-card featured" onclick="showPage('case4')">
+                    <span class="case-card-number">Case Study 04 · Latest</span>
+                    <h3 class="case-card-title">The In-Stay Digital Gap: A Product Concept for Indian Luxury Hospitality</h3>
+                    <p class="case-card-summary">A product observation at a luxury hotel in Agra led to a deep research exercise — uncovering a gap in India's hospitality tech landscape and a NeuPass integration angle that sparked a formal conversation with IHCL's Head of Loyalty.</p>
+                    <div class="case-card-meta">
+                        <span class="case-card-tag highlight">Consumer · Hospitality</span>
+                        <span class="case-card-tag highlight">NeuPass · IHCL</span>
+                        <span class="case-card-tag">Independent Research</span>
+                    </div>
+                </article>
                 <article class="case-card" onclick="showPage('case1')">
                     <span class="case-card-number">Case Study 01</span>
                     <h3 class="case-card-title">From v1 to v3: Solving a supply-side platform problem</h3>
@@ -981,71 +234,41 @@
             </div>
         </section>
 
-        <!-- Products Grid -->
         <section class="section" style="background: var(--color-bg-alt); margin: 0 -100vw; padding-left: calc(50vw - 584px); padding-right: calc(50vw - 584px);">
             <div style="max-width: 1200px;">
-                <div class="section-header">
-                    <h2 class="section-title">Products I've Built</h2>
-                </div>
+                <div class="section-header"><h2 class="section-title">Products I've Built</h2></div>
                 <div class="products-grid">
-                    <div class="product-card">
-                        <h3 class="product-card-title">Weekly Practice</h3>
-                        <p class="product-card-desc">Chatbot content platform · 500K+ students · 10+ states</p>
-                        <p class="product-card-detail">Owned v1→v2, building v3 with AI-generated content</p>
-                    </div>
-                    <div class="product-card">
-                        <h3 class="product-card-title">Shikshak Sahayak 2.0</h3>
-                        <p class="product-card-desc">AI teacher assistant chatbot · 30K+ teachers · Multiple states</p>
-                        <p class="product-card-detail">Remedial learning, homework generation, lesson plans</p>
-                    </div>
-                    <div class="product-card">
-                        <h3 class="product-card-title">School Based Assessment</h3>
-                        <p class="product-card-desc">Digital assessment platform · 1M+ assessments · 10+ states</p>
-                        <p class="product-card-detail">Webview, data integrity fixes, Rajasthan SDK integration</p>
-                    </div>
-                    <div class="product-card">
-                        <h3 class="product-card-title">School Inspection App</h3>
-                        <p class="product-card-desc">Offline-first field inspection tool · 0→1 build</p>
-                        <p class="product-card-detail">Competitive research, PRD, shipped in MP and Sikkim</p>
-                    </div>
-                    <div class="product-card">
-                        <h3 class="product-card-title">AI Support Bot</h3>
-                        <p class="product-card-desc">AI bot for user success team</p>
-                        <p class="product-card-detail">Addressed ~50% missed call rate · Scoped, proposed, shipped</p>
-                    </div>
-                    <div class="product-card">
-                        <h3 class="product-card-title">Baker's Calculator</h3>
-                        <p class="product-card-desc">Pricing and nutrition tool for bakeries · Freelance</p>
-                        <p class="product-card-detail">Profit margins, calorie tracking · In development</p>
-                    </div>
+                    <div class="product-card"><h3 class="product-card-title">Weekly Practice</h3><p class="product-card-desc">Chatbot content platform · 500K+ students · 10+ states</p><p class="product-card-detail">Owned v1→v2, building v3 with AI-generated content</p></div>
+                    <div class="product-card"><h3 class="product-card-title">Shikshak Sahayak 2.0</h3><p class="product-card-desc">AI teacher assistant chatbot · 30K+ teachers · Multiple states</p><p class="product-card-detail">Remedial learning, homework generation, lesson plans</p></div>
+                    <div class="product-card"><h3 class="product-card-title">School Based Assessment</h3><p class="product-card-desc">Digital assessment platform · 1M+ assessments · 10+ states</p><p class="product-card-detail">Webview, data integrity fixes, Rajasthan SDK integration</p></div>
+                    <div class="product-card"><h3 class="product-card-title">School Inspection App</h3><p class="product-card-desc">Offline-first field inspection tool · 0→1 build</p><p class="product-card-detail">Competitive research, PRD, shipped in MP and Sikkim</p></div>
+                    <div class="product-card"><h3 class="product-card-title">AI Support Bot</h3><p class="product-card-desc">AI bot for user success team</p><p class="product-card-detail">Addressed ~50% missed call rate · Scoped, proposed, shipped</p></div>
+                    <div class="product-card"><h3 class="product-card-title">Baker's Calculator</h3><p class="product-card-desc">Pricing and nutrition tool for bakeries · Freelance</p><p class="product-card-detail">Profit margins, calorie tracking · In development</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- Side Projects -->
         <section class="section">
-            <div class="section-header">
-                <h2 class="section-title">Side Projects</h2>
-            </div>
+            <div class="section-header"><h2 class="section-title">Side Projects</h2></div>
             <div class="side-projects-grid">
                 <div class="side-project-card">
                     <span class="side-project-badge">In Development</span>
                     <h3 class="side-project-title">Baker's Calculator</h3>
-                    <p class="side-project-desc">A pricing and nutrition tool for small bakery businesses — profit margin calculator (ingredient costs, batch size, overheads → per-unit pricing), calorie tracker per serving, and curated business tips.</p>
+                    <p class="side-project-desc">A pricing and nutrition tool for small bakery businesses — profit margin calculator, calorie tracker per serving, and curated business tips.</p>
                 </div>
                 <div class="side-project-card">
                     <span class="side-project-badge">Writing Series</span>
                     <h3 class="side-project-title">#ProductIRL</h3>
-                    <p class="side-project-desc">A LinkedIn writing series turning everyday observations and real work experiences into product management lessons. Topics include supply-side constraints, stakeholder navigation, and building for non-tech users.</p>
+                    <p class="side-project-desc">A LinkedIn writing series turning everyday observations into product management insights. Most recent piece on the in-stay digital gap in Indian luxury hospitality sparked a conversation with IHCL's Head of Loyalty within hours of publishing.</p>
                 </div>
             </div>
         </section>
 
-        <!-- About Preview -->
         <section class="section">
             <div class="about-preview">
                 <div class="about-preview-visual">
-                    <div class="about-initials">IN</div>
+                    <img src="ishita.jpg" alt="Ishita Narang" class="about-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="about-initials" style="display:none;">IN</div>
                 </div>
                 <div class="about-preview-content">
                     <h2>A bit about me</h2>
@@ -1055,83 +278,55 @@
             </div>
         </section>
 
-        <!-- Contact -->
         <section class="contact-section">
             <div class="contact-inner">
                 <h2>Let's connect</h2>
-                <p>Looking to bring my experience building at scale for the hardest users to consumer tech.</p>
+                <p>Looking to bring this thinking to consumer-facing products at scale — where the user always has a choice.</p>
                 <div class="contact-buttons">
                     <a href="mailto:ishitanarang2109@gmail.com" class="contact-btn contact-btn-primary">Email me</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" class="contact-btn contact-btn-secondary">LinkedIn</a>
-                    <a href="#" class="contact-btn contact-btn-secondary">Resume</a>
+                    <a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank" class="contact-btn contact-btn-secondary">LinkedIn</a>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
         <footer class="footer">
             <div class="footer-inner">
                 <p class="footer-text">© 2025 Ishita Narang</p>
                 <div class="footer-links">
                     <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- ==================== ABOUT PAGE ==================== -->
+    <!-- ABOUT -->
     <div id="page-about" class="page about-page">
         <div class="about-layout">
             <aside class="about-sidebar">
-                <div class="about-sidebar-initials">IN</div>
+                <img src="ishita.jpg" alt="Ishita Narang" class="about-sidebar-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="about-sidebar-initials" style="display:none;">IN</div>
                 <h1>Ishita Narang</h1>
-                <p class="about-sidebar-tagline">Product Manager · AI × Platform × Ops</p>
+                <p class="about-sidebar-tagline">Product Manager · Consumer & Platform Products</p>
                 <div class="about-sidebar-links">
                     <a href="mailto:ishitanarang2109@gmail.com" class="about-sidebar-link">Email</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" class="about-sidebar-link">LinkedIn</a>
-                    <a href="#" class="about-sidebar-link">Resume</a>
+                    <a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank" class="about-sidebar-link">LinkedIn</a>
                 </div>
             </aside>
             <main class="about-content">
                 <h2>My Story</h2>
                 <p>I didn't find product management through an MBA or a course. I found it through classrooms.</p>
-                <p>I spent two years as a Teach for India fellow, teaching 96 students across Grades 7-10. Then I trained 100+ teachers at LEAD. Then I managed education programs across Indian states. Now I build the products I once wished existed — AI chatbots that help teachers prepare lessons, assessment tools that work offline in rural schools, and inspection apps that bring accountability to a system that ran on paper.</p>
-
-                <div class="about-philosophy">
-                    <p>"Simplicity blended with empathy. Every feature I ship has to work the first time, for users who won't give you a second chance."</p>
-                </div>
-
-                <p>That means building for low connectivity, multiple languages, and people who've never filed a bug report in their lives.</p>
-                <p>Today I own 6+ products on a platform with 1.7M+ monthly active users across 468K+ schools in 10+ Indian states. I'm now looking to bring this experience — building at scale for the hardest users — to consumer tech, where the bar for simplicity and delight is even higher.</p>
-
+                <p>I spent two years as a Teach for India fellow, teaching 96 students across Grades 7-10. Then I trained 100+ teachers at LEAD. Then I managed education programs across Indian states. Now I build the products I once wished existed.</p>
+                <div class="about-philosophy"><p>"Simplicity blended with empathy. Every feature I ship has to work the first time, for users who won't give you a second chance."</p></div>
+                <p>Today I own 6+ products on a platform with 1.7M+ monthly active users across 468K+ schools in 10+ Indian states. I'm now looking to bring this experience to consumer tech — where the bar for simplicity and delight is even higher, and the user always has a choice.</p>
                 <div class="about-journey">
                     <h3>The Journey</h3>
                     <div class="journey-timeline">
-                        <div class="journey-item">
-                            <span class="journey-period">Now</span>
-                            <div class="journey-content">
-                                <h4>Product Manager</h4>
-                                <p>Owning 6+ products · 1.7M+ MAU · AI chatbots, assessment platforms, field inspection tools</p>
-                            </div>
-                        </div>
-                        <div class="journey-item">
-                            <span class="journey-period">Earlier</span>
-                            <div class="journey-content">
-                                <h4>LEAD — Academic Trainer</h4>
-                                <p>Trained 100+ teachers · Managed education programs across states</p>
-                            </div>
-                        </div>
-                        <div class="journey-item">
-                            <span class="journey-period">Foundation</span>
-                            <div class="journey-content">
-                                <h4>Teach for India Fellow</h4>
-                                <p>2 years · 96 students · Grades 7-10 · Where it all started</p>
-                            </div>
-                        </div>
+                        <div class="journey-item"><span class="journey-period">Now</span><div class="journey-content"><h4>Product Manager</h4><p>Owning 6+ products · 1.7M+ MAU · AI chatbots, assessment platforms, field inspection tools</p></div></div>
+                        <div class="journey-item"><span class="journey-period">Earlier</span><div class="journey-content"><h4>LEAD — Academic Trainer</h4><p>Trained 100+ teachers · Managed education programs across states</p></div></div>
+                        <div class="journey-item"><span class="journey-period">Foundation</span><div class="journey-content"><h4>Teach for India Fellow</h4><p>2 years · 96 students · Grades 7-10 · Where it all started</p></div></div>
                     </div>
                 </div>
-
                 <div class="about-interests">
                     <h3>When I'm Not Building</h3>
                     <div class="interests-tags">
@@ -1143,298 +338,412 @@
                 </div>
             </main>
         </div>
+        <footer class="footer">
+            <div class="footer-inner">
+                <p class="footer-text">© 2025 Ishita Narang</p>
+                <div class="footer-links">
+                    <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CASE STUDY 4 — IHCL -->
+    <div id="page-case4" class="page case-study-page">
+        <header class="case-study-hero">
+            <a class="case-study-back" onclick="showPage('home')">← Back to all work</a>
+            <h1>The In-Stay Digital Gap: A Product Concept for Indian Luxury Hospitality</h1>
+            <p class="summary">A product observation at a luxury hotel in Agra led to a deep research exercise — uncovering a gap in India's hospitality tech landscape that nobody was connecting to NeuPass.</p>
+            <div class="case-study-meta">
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Type</span><span class="case-study-meta-value">Independent Research & Concept</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Role</span><span class="case-study-meta-value">Solo — Research, Product Thinking, Mockup</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Outcome</span><span class="case-study-meta-value">Formal conversation with IHCL's Head of Loyalty</span></div>
+            </div>
+        </header>
+
+        <article class="case-study-content">
+            <h2>The Observation</h2>
+            <p>During a stay in Agra over the Good Friday long weekend, I noticed something that felt impossible to unsee as a product person. The property was exceptional — the service, the detail, the feeling of being genuinely looked after. And then I needed extra towels.</p>
+            <p>I picked up the landline. That single moment — at a property backed by one of India's strongest loyalty ecosystems — revealed a gap no amount of thread count could paper over.</p>
+
+            <h2>The Problem — Three Layers</h2>
+            <p><strong>Layer 1 — The request flow is broken.</strong> Four questions every guest has, none with a digital answer:</p>
+
+            <div class="diagram-container">
+                <div class="diagram-title">The Four Unanswered Guest Questions</div>
+                <svg viewBox="0 0 660 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker></defs>
+                    <rect x="10" y="20" width="140" height="65" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="80" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">What's included</text>
+                    <text x="80" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">vs. extra?</text>
+                    <rect x="170" y="20" width="140" height="65" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="240" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">How to request</text>
+                    <text x="240" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">without calling?</text>
+                    <rect x="330" y="20" width="140" height="65" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="400" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">Did my request</text>
+                    <text x="400" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">go through?</text>
+                    <rect x="490" y="20" width="150" height="65" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="565" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">When is it</text>
+                    <text x="565" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">arriving?</text>
+                    <line x1="80" y1="85" x2="80" y2="140" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a1)" stroke-dasharray="4,3"/>
+                    <line x1="240" y1="85" x2="240" y2="140" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a1)" stroke-dasharray="4,3"/>
+                    <line x1="400" y1="85" x2="400" y2="140" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a1)" stroke-dasharray="4,3"/>
+                    <line x1="565" y1="85" x2="565" y2="140" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a1)" stroke-dasharray="4,3"/>
+                    <rect x="220" y="148" width="220" height="42" rx="8" fill="#1A1A1A"/>
+                    <text x="330" y="176" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="white" font-weight="600">📞 The Landline</text>
+                </svg>
+            </div>
+
+            <p><strong>Layer 2 — Global solutions exist but India's luxury segment hasn't adopted them.</strong> Canary Technologies (25,000+ hotels), STAY App, IRIS, Hoteligy — an entire category of QR-activated tools. No download, scan and go. IHCL launched I-ZEST post-Covid — digital check-in, QR menus. Smart. But it stopped at the surface. The in-stay service request layer was never closed.</p>
+
+            <p><strong>Layer 3 — The data already exists. Nobody is connecting it.</strong></p>
+
+            <div class="diagram-container">
+                <div class="diagram-title">The NeuPass Gap — Data That Exists But Never Surfaces During the Stay</div>
+                <svg viewBox="0 0 660 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs>
+                        <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker>
+                        <marker id="a2g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8C8C8C"/></marker>
+                    </defs>
+                    <rect x="20" y="20" width="180" height="105" rx="10" fill="#1A1A1A"/>
+                    <text x="110" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="white" font-weight="600">Tata Neu / NeuPass</text>
+                    <text x="110" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">10M+ members</text>
+                    <text x="110" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Tier · Package · Spend</text>
+                    <text x="110" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Preferences · History</text>
+                    <text x="110" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">All exists pre-arrival</text>
+                    <line x1="200" y1="72" x2="255" y2="72" stroke="#C4652A" stroke-width="2" marker-end="url(#a2)"/>
+                    <text x="227" y="64" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">Works ✓</text>
+                    <rect x="255" y="47" width="120" height="50" rx="8" fill="#F8F5F0" stroke="#E8E4DE" stroke-width="1.5"/>
+                    <text x="315" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1A1A1A">🏨 Check-In</text>
+                    <text x="315" y="87" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Guest arrives</text>
+                    <line x1="375" y1="72" x2="425" y2="72" stroke="#8C8C8C" stroke-width="2" marker-end="url(#a2g)" stroke-dasharray="5,4"/>
+                    <text x="400" y="64" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">Breaks ✗</text>
+                    <rect x="425" y="47" width="215" height="50" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5" stroke-dasharray="5,3"/>
+                    <text x="532" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1A1A1A">📞 In the Room</text>
+                    <text x="532" y="87" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">NeuPass data never arrives</text>
+                    <rect x="20" y="155" width="620" height="55" rx="8" fill="rgba(196,101,42,0.07)" stroke="rgba(196,101,42,0.25)" stroke-width="1"/>
+                    <text x="330" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A" font-style="italic">A Platinum member with 80 nights picks up the same landline as a first-time guest.</text>
+                    <text x="330" y="197" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#C4652A" font-weight="600">The loyalty engine and the service engine have never spoken to each other.</text>
+                </svg>
+            </div>
+
+            <h2>The Solution</h2>
+            <p>A disposable guest PWA activated at check-in via QR code. No download. No account creation. Package inclusions visible upfront — before any tap, not on the bill at checkout. Services tagged Included or ₹ Extra. Live request tracking. Spa booking from included sessions. Auto-deletes at checkout.</p>
+
+            <div class="diagram-container">
+                <div class="diagram-title">The Proposed Guest Flow</div>
+                <svg viewBox="0 0 660 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs><marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker></defs>
+                    <rect x="10" y="30" width="100" height="55" rx="8" fill="#1A1A1A"/>
+                    <text x="60" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="white">Check In</text>
+                    <text x="60" y="71" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.6)">Scan QR</text>
+                    <line x1="110" y1="57" x2="135" y2="57" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a3)"/>
+                    <rect x="135" y="30" width="110" height="55" rx="8" fill="#F8F5F0" stroke="#E8E4DE"/>
+                    <text x="190" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">PWA loads</text>
+                    <text x="190" y="71" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Package visible</text>
+                    <line x1="245" y1="57" x2="270" y2="57" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a3)"/>
+                    <rect x="270" y="30" width="110" height="55" rx="8" fill="#F8F5F0" stroke="#E8E4DE"/>
+                    <text x="325" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">Request</text>
+                    <text x="325" y="71" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Track live</text>
+                    <line x1="380" y1="57" x2="405" y2="57" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a3)"/>
+                    <rect x="405" y="30" width="110" height="55" rx="8" fill="#F8F5F0" stroke="#E8E4DE"/>
+                    <text x="460" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">Book Spa</text>
+                    <text x="460" y="71" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#4A7C59">Included ✓</text>
+                    <line x1="515" y1="57" x2="540" y2="57" stroke="#C4652A" stroke-width="1.5" marker-end="url(#a3)"/>
+                    <rect x="540" y="30" width="110" height="55" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="595" y="54" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">Check Out</text>
+                    <text x="595" y="71" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">App deletes</text>
+                </svg>
+            </div>
+
+            <h2>The Mockup</h2>
+            <p>Built to show what the guest experience could look like — package inclusions surfaced upfront, Included vs ₹ Extra tags on every service, live request tracker, Jiva Spa booking with one tap, auto-delete banner at checkout.</p>
+            <div class="mockup-container">
+                <img src="hotel-mockup.png" alt="Hotel Guest App Mockup" onerror="this.parentElement.innerHTML='<div style=\'padding:2rem;text-align:center;color:#8C8C8C;font-size:0.9rem;\'>Upload hotel-mockup.png to your repo to display the mockup here</div>'">
+                <div class="mockup-caption">Concept mockup — disposable guest PWA for luxury hotel in-stay experience · Ishita Narang</div>
+            </div>
+
+            <h2>Where It Gets Hard</h2>
+            <p>The guest-facing layer practically designs itself. The real product challenge is the backend. Legacy Property Management Systems like Oracle OPERA and IDS were never built to talk to modern APIs. Getting a clean real-time integration that pushes service requests, pulls package data, and updates room status is where most teams hit a wall. It's not a vision problem — it's an unglamorous, expensive, deeply necessary infrastructure problem.</p>
+            <div class="decision-callout"><p>The technology exists. The loyalty data exists. The guest appetite exists. The missing piece is execution on the hard, unsexy, foundational layer that makes the pretty interface actually work.</p></div>
+
+            <div class="what-happened-box">
+                <h3>What Happened Next</h3>
+                <p>I published this as a Product IRL piece on LinkedIn. Within minutes, Kumud Joshi — Head of Loyalty at IHCL — reached out personally. We spoke the following day. A formal product conversation followed. Sometimes the best way to show you understand a problem is to just show your thinking publicly.</p>
+            </div>
+
+            <h2>Key Product Decisions</h2>
+            <div class="decision-callout"><p>Disposable PWA over native app — friction before value kills adoption. A first-time guest shouldn't need a Tata Neu account to request towels.</p></div>
+            <ul>
+                <li><strong>Package transparency before the tap, not after.</strong> The hesitation before calling — "is this free or will it show up on my bill?" — is what kills spontaneous service usage.</li>
+                <li><strong>NeuPass integration as the long-term play.</strong> The loyalty data already exists. The in-stay layer just needs to connect to it.</li>
+                <li><strong>Auto-delete at checkout.</strong> Zero data residue builds trust and removes friction before scanning.</li>
+            </ul>
+        </article>
+
+        <nav class="case-study-nav">
+            <div></div>
+            <a class="case-study-nav-link next" onclick="showPage('case1')">
+                <span>Next Case Study</span>
+                <strong>From v1 to v3: Supply-side platform →</strong>
+            </a>
+        </nav>
 
         <footer class="footer">
             <div class="footer-inner">
                 <p class="footer-text">© 2025 Ishita Narang</p>
                 <div class="footer-links">
                     <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- ==================== CASE STUDY 1 ==================== -->
+    <!-- CASE STUDY 1 -->
     <div id="page-case1" class="page case-study-page">
         <header class="case-study-hero">
             <a class="case-study-back" onclick="showPage('home')">← Back to all work</a>
             <h1>From v1 to v3: Solving a supply-side platform problem</h1>
             <p class="summary">How I evolved a content delivery platform from manual dumps to AI-generated content, growing it to 500K+ users across 10+ states.</p>
             <div class="case-study-meta">
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Product</span>
-                    <span class="case-study-meta-value">Weekly Practice</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Role</span>
-                    <span class="case-study-meta-value">Product Owner (v1→v3)</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Impact</span>
-                    <span class="case-study-meta-value">500K+ students, 10+ states</span>
-                </div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Product</span><span class="case-study-meta-value">Weekly Practice</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Role</span><span class="case-study-meta-value">Product Owner (v1→v3)</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Impact</span><span class="case-study-meta-value">500K+ students, 10+ states</span></div>
             </div>
         </header>
-
         <article class="case-study-content">
             <h2>The Problem</h2>
-            <p>Weekly Practice is a chatbot that delivers curriculum-aligned quizzes and homework to students. In v1, it relied entirely on state governments manually providing question banks — a slow, error-prone process that blocked expansion.</p>
-            <p>Every new state meant months of waiting for content. Completion rates were declining because the experience felt static and one-size-fits-all.</p>
+            <p>Weekly Practice is a chatbot that delivers curriculum-aligned quizzes and homework to students. In v1, it relied entirely on state governments manually providing question banks — a slow, error-prone process that blocked expansion. Every new state meant months of waiting for content. Completion rates were declining because the experience felt static and one-size-fits-all.</p>
+
+            <h2>How the Platform Evolved</h2>
+            <div class="diagram-container">
+                <div class="diagram-title">Platform Evolution — v1 to v3</div>
+                <svg viewBox="0 0 660 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs><marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker></defs>
+                    <rect x="20" y="20" width="180" height="110" rx="10" fill="#F8F5F0" stroke="#E8E4DE" stroke-width="1.5"/>
+                    <text x="110" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">v1</text>
+                    <text x="110" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">Manual content dumps</text>
+                    <text x="110" y="85" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">from state govts</text>
+                    <text x="110" y="105" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">↓ Declining completion</text>
+                    <text x="110" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">↓ Blocked expansion</text>
+                    <line x1="200" y1="75" x2="235" y2="75" stroke="#C4652A" stroke-width="2" marker-end="url(#b1)"/>
+                    <rect x="235" y="20" width="190" height="110" rx="10" fill="#F8F5F0" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="330" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">v2</text>
+                    <text x="330" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">Teacher-assigned homework</text>
+                    <text x="330" y="83" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">Adaptive practice cutoffs</text>
+                    <text x="330" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">State-configurable priority</text>
+                    <text x="330" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#4A7C59">↑ New state onboarding</text>
+                    <line x1="425" y1="75" x2="455" y2="75" stroke="#C4652A" stroke-width="2" marker-end="url(#b1)"/>
+                    <rect x="455" y="20" width="185" height="110" rx="10" fill="#1A1A1A"/>
+                    <text x="547" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="white">v3 — In Progress</text>
+                    <text x="547" y="66" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">AI-generated content</text>
+                    <text x="547" y="83" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">Zero supply dependency</text>
+                    <text x="547" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="rgba(255,255,255,0.7)">Instant state scaling</text>
+                    <text x="547" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">↑ Removes the bottleneck</text>
+                    <rect x="20" y="165" width="620" height="80" rx="10" fill="rgba(196,101,42,0.05)" stroke="rgba(196,101,42,0.2)"/>
+                    <text x="330" y="190" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#1A1A1A">The Core Insight</text>
+                    <text x="330" y="210" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">States refused to share content on external servers. Every version responded to that constraint —</text>
+                    <text x="330" y="228" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">until v3 removed the dependency entirely by generating content instead of requesting it.</text>
+                </svg>
+            </div>
 
             <h2>What I Did</h2>
-            <p><strong>V1 → V2:</strong> I identified declining completion rates and diagnosed two root causes — no teacher involvement and no adaptability to student performance. I designed two features:</p>
-            <ul>
-                <li><strong>Homework by My Teacher:</strong> Teachers assign weekly homework through a companion chatbot, connecting classroom teaching to practice.</li>
-                <li><strong>Advanced Practice:</strong> Students scoring below a configurable cutoff get additional practice on the same learning outcomes.</li>
-            </ul>
-            <p>I also built priority configuration — states could decide whether students see the quiz or homework first, making the product adaptable to different pedagogical priorities.</p>
-
-            <p><strong>V2 → V3 (currently building):</strong> Even with v2's improvements, scaling content remained the bottleneck. States refused to host their question banks on our servers due to trust and policy concerns.</p>
-            <p>Instead of pushing harder on the same approach, I led the shift to AI-generated assessment content — removing the supply-side dependency entirely.</p>
+            <p><strong>V1 → V2:</strong> Diagnosed two root causes — no teacher involvement and no adaptability to performance. Built teacher-assigned homework, adaptive practice cutoffs, and state-configurable priority settings.</p>
+            <p><strong>V2 → V3 (currently building):</strong> States refused to host content on our servers. Instead of pushing the same approach, led the shift to AI-generated assessment content — removing the supply-side dependency entirely.</p>
 
             <div class="outcome-box">
                 <h3>Key Outcomes</h3>
                 <ul>
-                    <li>Grew from initial deployment to <strong>500K+ students across 10+ states</strong></li>
-                    <li>V2's configurability unlocked new state onboarding that wasn't possible with v1's rigid model</li>
-                    <li>V3 (in progress) eliminates the content dependency that had blocked expansion for months</li>
+                    <li>Grew to <strong>500K+ students across 10+ states</strong></li>
+                    <li>V2's configurability unlocked new state onboarding not possible with v1</li>
+                    <li>V3 (in progress) eliminates the content dependency that blocked expansion for months</li>
                 </ul>
             </div>
 
             <h2>Key Product Decisions</h2>
-            <div class="decision-callout">
-                <p>Chose teacher agency over better quiz algorithms — bet that involvement drives adoption more than optimization. It worked.</p>
-            </div>
+            <div class="decision-callout"><p>Chose teacher agency over better quiz algorithms — bet that involvement drives adoption more than optimization. It worked.</p></div>
             <ul>
-                <li>Made priority settings state-configurable rather than hardcoding a default — more engineering effort upfront but allowed us to serve states with opposing pedagogical philosophies.</li>
-                <li>V3's AI shift wasn't about "adding AI" — it was the only way to remove a structural dependency. AI was the right tool for this specific constraint.</li>
+                <li>State-configurable priority over hardcoded defaults — more engineering effort but served states with opposing pedagogical philosophies.</li>
+                <li>V3's AI shift wasn't about "adding AI" — it was the only way to remove a structural dependency.</li>
             </ul>
         </article>
-
         <nav class="case-study-nav">
-            <div></div>
-            <a class="case-study-nav-link next" onclick="showPage('case2')">
-                <span>Next Case Study</span>
-                <strong>When your biggest client refuses to use your product →</strong>
-            </a>
+            <a class="case-study-nav-link" onclick="showPage('case4')"><span>Previous</span><strong>← The In-Stay Digital Gap</strong></a>
+            <a class="case-study-nav-link next" onclick="showPage('case2')"><span>Next Case Study</span><strong>When your biggest client refuses →</strong></a>
         </nav>
-
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="footer-text">© 2025 Ishita Narang</p>
-                <div class="footer-links">
-                    <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </footer>
+        <footer class="footer"><div class="footer-inner"><p class="footer-text">© 2025 Ishita Narang</p><div class="footer-links"><a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a><a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a></div></div></footer>
     </div>
 
-    <!-- ==================== CASE STUDY 2 ==================== -->
+    <!-- CASE STUDY 2 -->
     <div id="page-case2" class="page case-study-page">
         <header class="case-study-hero">
             <a class="case-study-back" onclick="showPage('home')">← Back to all work</a>
             <h1>When your biggest client refuses to use your product</h1>
             <p class="summary">How I retained Rajasthan as a client by building an SDK integration instead of forcing user migration — and fixed a data integrity crisis along the way.</p>
             <div class="case-study-meta">
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Product</span>
-                    <span class="case-study-meta-value">School Based Assessment</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Role</span>
-                    <span class="case-study-meta-value">Product Manager</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Impact</span>
-                    <span class="case-study-meta-value">1M+ assessments, 10+ states</span>
-                </div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Product</span><span class="case-study-meta-value">School Based Assessment</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Role</span><span class="case-study-meta-value">Product Manager</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Impact</span><span class="case-study-meta-value">1M+ assessments, 10+ states</span></div>
             </div>
         </header>
-
         <article class="case-study-content">
             <h2>The Problem</h2>
-            <p>Our School Based Assessment (SBA) platform had captured 1M+ assessments across 10+ states. But Rajasthan — one of our largest and most important deployments — refused to move their teachers to our platform.</p>
-            <p>They had an existing app (Shikshak App) that teachers used daily, and the state education department didn't want the overhead of training hundreds of thousands of teachers on a new tool.</p>
-            <p>Separately, I discovered that manual registry dumps had created duplicate student records across schools — the same student appearing in two different schools' data, corrupting assessment results.</p>
+            <p>Our SBA platform had 1M+ assessments across 10+ states. But Rajasthan — one of our largest deployments — refused to move teachers to our platform. They had an existing app teachers used daily and didn't want the training overhead. Separately, manual registry dumps had created duplicate student records, corrupting assessment results.</p>
+
+            <h2>The SDK Architecture</h2>
+            <div class="diagram-container">
+                <div class="diagram-title">SDK Integration — Meeting the Client Where They Are</div>
+                <svg viewBox="0 0 660 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs><marker id="c1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker></defs>
+                    <text x="10" y="22" font-family="DM Sans,sans-serif" font-size="11" fill="#8C8C8C">❌ What we wanted (rejected)</text>
+                    <rect x="10" y="30" width="130" height="55" rx="8" fill="#F8F5F0" stroke="#E8E4DE"/>
+                    <text x="75" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">Rajasthan</text>
+                    <text x="75" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Teachers</text>
+                    <line x1="140" y1="57" x2="175" y2="57" stroke="#8C8C8C" stroke-width="1.5" stroke-dasharray="4,3"/>
+                    <text x="157" y="49" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">Refused</text>
+                    <rect x="175" y="30" width="130" height="55" rx="8" fill="#F8F5F0" stroke="#E8E4DE"/>
+                    <text x="240" y="55" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#6B6B6B">Our SBA</text>
+                    <text x="240" y="72" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Platform</text>
+                    <text x="10" y="122" font-family="DM Sans,sans-serif" font-size="11" fill="#4A7C59">✓ What we built instead</text>
+                    <rect x="10" y="130" width="130" height="65" rx="8" fill="#1A1A1A"/>
+                    <text x="75" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="white">Rajasthan</text>
+                    <text x="75" y="172" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Shikshak App</text>
+                    <text x="75" y="187" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,0.4)">familiar interface</text>
+                    <line x1="140" y1="162" x2="175" y2="162" stroke="#C4652A" stroke-width="2" marker-end="url(#c1)"/>
+                    <text x="157" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">SDK</text>
+                    <rect x="175" y="130" width="130" height="65" rx="8" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="240" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#1A1A1A">Our Assessment</text>
+                    <text x="240" y="172" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">Engine (embedded)</text>
+                    <text x="240" y="187" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6B6B6B">Teachers never leave</text>
+                    <rect x="370" y="130" width="270" height="65" rx="8" fill="rgba(74,124,89,0.1)" stroke="rgba(74,124,89,0.3)"/>
+                    <text x="505" y="155" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#1A1A1A">Result</text>
+                    <text x="505" y="173" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#4A7C59">Rajasthan retained as client</text>
+                    <text x="505" y="189" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Zero teacher migration required</text>
+                </svg>
+            </div>
 
             <h2>What I Did</h2>
-            <p><strong>Problem 1 — Rajasthan integration:</strong></p>
-            <p>I proposed a different approach: instead of forcing migration, build an SDK to embed our assessment webview inside Rajasthan's existing Shikshak App. Teachers would never leave their familiar interface. Our assessment engine would run inside it.</p>
-            <p>I wrote the integration specs, coordinated with engineering on the SDK architecture, and managed testing with Rajasthan's technical team. The approach let us retain the client with zero user disruption.</p>
-
-            <p><strong>Problem 2 — Data integrity:</strong></p>
-            <p>I built a webview to simplify the assessment process for teachers (replacing the complex chatbot flow with a cleaner UI for actual assessment capture). I also discovered the duplicate records issue, traced it to the manual registry upload process, and architected validation logic that identified and cleaned duplicate entries across the dataset.</p>
+            <p><strong>Problem 1 — Rajasthan integration:</strong> Instead of forcing migration, built an SDK to embed our assessment webview inside Rajasthan's existing Shikshak App. Teachers never left their familiar interface. I wrote the integration specs, coordinated on SDK architecture, and managed testing with Rajasthan's technical team.</p>
+            <p><strong>Problem 2 — Data integrity:</strong> Built a webview to simplify assessment capture. Discovered the duplicate records issue, traced it to manual registry uploads, and architected validation logic to identify and clean duplicate entries.</p>
 
             <div class="outcome-box">
                 <h3>Key Outcomes</h3>
                 <ul>
                     <li><strong>Retained Rajasthan as a client</strong> — zero teacher migration required</li>
-                    <li>SDK approach became a template for other states with similar resistance</li>
-                    <li>Assessment webview simplified the teacher experience</li>
-                    <li>Validation logic cleaned the registry data, ensuring accurate assessment records</li>
+                    <li>SDK approach became a template for other resistant states</li>
+                    <li>Validation logic cleaned the registry, ensuring accurate assessment records</li>
                     <li>SBA platform now at <strong>1M+ assessments across 10+ states</strong></li>
                 </ul>
             </div>
 
             <h2>Key Product Decisions</h2>
-            <div class="decision-callout">
-                <p>Chose integration over migration — met the client where they were instead of where we wanted them to be.</p>
-            </div>
+            <div class="decision-callout"><p>Chose integration over migration — met the client where they were instead of where we wanted them to be.</p></div>
             <ul>
-                <li>Built the webview because the chatbot interface was too complex for multi-step assessment flows — not every problem is best solved in a chat UI.</li>
-                <li>The SDK approach has reuse potential — any state that refuses to adopt our app can get the same integration.</li>
+                <li>Built the webview because the chatbot interface was too complex for multi-step assessment flows.</li>
+                <li>SDK approach has reuse potential — any state that refuses to migrate can get the same integration.</li>
             </ul>
         </article>
-
         <nav class="case-study-nav">
-            <a class="case-study-nav-link" onclick="showPage('case1')">
-                <span>Previous</span>
-                <strong>← From v1 to v3: Supply-side platform</strong>
-            </a>
-            <a class="case-study-nav-link next" onclick="showPage('case3')">
-                <span>Next Case Study</span>
-                <strong>Building a field inspection product →</strong>
-            </a>
+            <a class="case-study-nav-link" onclick="showPage('case1')"><span>Previous</span><strong>← From v1 to v3: Supply-side platform</strong></a>
+            <a class="case-study-nav-link next" onclick="showPage('case3')"><span>Next Case Study</span><strong>Building a field inspection product →</strong></a>
         </nav>
-
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="footer-text">© 2025 Ishita Narang</p>
-                <div class="footer-links">
-                    <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </footer>
+        <footer class="footer"><div class="footer-inner"><p class="footer-text">© 2025 Ishita Narang</p><div class="footer-links"><a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a><a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a></div></div></footer>
     </div>
 
-    <!-- ==================== CASE STUDY 3 ==================== -->
+    <!-- CASE STUDY 3 -->
     <div id="page-case3" class="page case-study-page">
         <header class="case-study-hero">
             <a class="case-study-back" onclick="showPage('home')">← Back to all work</a>
             <h1>Building a field inspection product from zero</h1>
             <p class="summary">Competitive research across 7+ state government systems revealed a clear market gap — then I wrote the PRD, designed offline-first flows, and shipped in 2 states.</p>
             <div class="case-study-meta">
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Product</span>
-                    <span class="case-study-meta-value">School Inspection App</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Role</span>
-                    <span class="case-study-meta-value">Product Manager (0→1)</span>
-                </div>
-                <div class="case-study-meta-item">
-                    <span class="case-study-meta-label">Shipped</span>
-                    <span class="case-study-meta-value">Madhya Pradesh & Sikkim</span>
-                </div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Product</span><span class="case-study-meta-value">School Inspection App</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Role</span><span class="case-study-meta-value">Product Manager (0→1)</span></div>
+                <div class="case-study-meta-item"><span class="case-study-meta-label">Shipped</span><span class="case-study-meta-value">Madhya Pradesh & Sikkim</span></div>
             </div>
         </header>
-
         <article class="case-study-content">
             <h2>The Problem</h2>
-            <p>School inspections across Indian states were paper-based. Inspecting officers would visit schools, fill forms manually, and submit reports that went into filing cabinets.</p>
-            <p>There was no digital tracking, no accountability loop (inspectors couldn't verify if their recommendations were implemented), and no way to follow up systematically.</p>
+            <p>School inspections across Indian states were paper-based. No digital tracking, no accountability loop, no systematic follow-up. Reports went into filing cabinets.</p>
+
+            <h2>The Closed-Loop Accountability Flow</h2>
+            <div class="diagram-container">
+                <div class="diagram-title">The Accountability Loop — The Core Differentiator vs. Every Existing System</div>
+                <svg viewBox="0 0 660 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;display:block;margin:0 auto;">
+                    <defs>
+                        <marker id="d1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C4652A"/></marker>
+                        <marker id="d2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4A7C59"/></marker>
+                    </defs>
+                    <rect x="20" y="50" width="150" height="75" rx="10" fill="#1A1A1A"/>
+                    <text x="95" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="white" font-weight="600">Inspector</text>
+                    <text x="95" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Visits school</text>
+                    <text x="95" y="113" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Offline inspection</text>
+                    <line x1="170" y1="87" x2="210" y2="87" stroke="#C4652A" stroke-width="2" marker-end="url(#d1)"/>
+                    <text x="190" y="79" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">Findings</text>
+                    <rect x="210" y="50" width="170" height="75" rx="10" fill="#F8F5F0" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="295" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1A1A1A" font-weight="600">Head of School</text>
+                    <text x="295" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Receives tasks</text>
+                    <text x="295" y="113" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6B6B6B">Updates resolution status</text>
+                    <line x1="380" y1="87" x2="420" y2="87" stroke="#C4652A" stroke-width="2" marker-end="url(#d1)"/>
+                    <text x="400" y="79" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#C4652A">Status update</text>
+                    <rect x="420" y="50" width="220" height="75" rx="10" fill="#FDF3EC" stroke="#C4652A" stroke-width="1.5"/>
+                    <text x="530" y="78" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#1A1A1A" font-weight="600">Inspector Returns</text>
+                    <text x="530" y="96" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">Validates resolution</text>
+                    <text x="530" y="113" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#C4652A">on reinspection</text>
+                    <path d="M 640 125 Q 640 175 330 175 Q 20 175 20 125" stroke="#4A7C59" stroke-width="1.5" fill="none" marker-end="url(#d2)" stroke-dasharray="5,3"/>
+                    <text x="330" y="170" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#4A7C59">Every finding gets verified — closed loop</text>
+                    <text x="330" y="20" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#8C8C8C">Every existing system was one-directional. This loop was the differentiator.</text>
+                </svg>
+            </div>
 
             <h2>Research</h2>
-            <p>I studied 7+ existing state government inspection systems:</p>
-            <ul>
-                <li><strong>Rajasthan:</strong> ShalaDarpan + ShalaSamblan</li>
-                <li><strong>Gujarat:</strong> SSA CRC Monitoring App</li>
-                <li><strong>West Bengal:</strong> m-PARIDARSHAN</li>
-                <li>And 4+ others across different states</li>
-            </ul>
-            <p><strong>Key finding:</strong> No existing solution combined intelligent scheduling + pre-filled dynamic forms + spot assessments + closed-loop ticketing in a single, state-scalable system. Every solution was state-locked and lacked an accountability layer.</p>
+            <p>I studied 7+ existing systems: ShalaDarpan + ShalaSamblan (Rajasthan), SSA CRC Monitoring App (Gujarat), m-PARIDARSHAN (West Bengal), and 4+ others. Key finding: no existing solution combined intelligent scheduling + dynamic forms + spot assessments + closed-loop ticketing. Every solution was state-locked and lacked an accountability layer.</p>
 
             <h2>Product Design</h2>
-            <p>I wrote the PRD covering:</p>
-            <ul>
-                <li><strong>Offline-first inspection:</strong> Complete inspections without internet, auto-sync when reconnected</li>
-                <li><strong>Task-based assessment:</strong> Mark items Yes/No with mandatory comments on negative findings</li>
-                <li><strong>Photo/video evidence capture</strong></li>
-                <li><strong>Closed-loop feedback:</strong> Head of School receives tasks, updates status, Inspector validates on revisit</li>
-                <li><strong>Session management:</strong> 24-hour save window for incomplete inspections</li>
-            </ul>
+            <p>PRD covered: offline-first inspection with auto-sync, task-based assessment with mandatory comments on negative findings, photo/video evidence, closed-loop feedback, and 24-hour session management.</p>
 
             <div class="outcome-box">
                 <h3>Key Outcomes</h3>
                 <ul>
                     <li><strong>Shipped v1 in Madhya Pradesh and Sikkim</strong></li>
-                    <li>Currently building v2 with geo-tagging and push notifications</li>
-                    <li>The competitive research identified a clear gap that no state system had addressed</li>
+                    <li>Building v2 with geo-tagging and push notifications</li>
+                    <li>Research identified a clear gap no state system had addressed</li>
                 </ul>
             </div>
 
             <h2>Key Product Decisions</h2>
-            <div class="decision-callout">
-                <p>Offline-first was non-negotiable — inspectors visit rural schools with unreliable connectivity.</p>
-            </div>
+            <div class="decision-callout"><p>Offline-first was non-negotiable — inspectors visit rural schools with unreliable connectivity.</p></div>
             <ul>
-                <li>Made comments mandatory on "No" responses — forces inspectors to explain, not just check boxes.</li>
-                <li>Designed conflict resolution via timestamp-based last-write-wins for concurrent data syncs.</li>
+                <li>Mandatory comments on "No" responses — forces inspectors to explain, not just check boxes.</li>
+                <li>Timestamp-based last-write-wins for concurrent data syncs.</li>
                 <li>The closed-loop (Inspector → HoS → Inspector reinspection) was the core differentiator — every other system was one-directional.</li>
             </ul>
         </article>
-
         <nav class="case-study-nav">
-            <a class="case-study-nav-link" onclick="showPage('case2')">
-                <span>Previous</span>
-                <strong>← When your biggest client refuses</strong>
-            </a>
+            <a class="case-study-nav-link" onclick="showPage('case2')"><span>Previous</span><strong>← When your biggest client refuses</strong></a>
             <div></div>
         </nav>
-
-        <footer class="footer">
-            <div class="footer-inner">
-                <p class="footer-text">© 2025 Ishita Narang</p>
-                <div class="footer-links">
-                    <a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a>
-                    <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-        </footer>
+        <footer class="footer"><div class="footer-inner"><p class="footer-text">© 2025 Ishita Narang</p><div class="footer-links"><a href="mailto:ishitanarang2109@gmail.com">ishitanarang2109@gmail.com</a><a href="https://www.linkedin.com/in/ishita-narang-230354175" target="_blank">LinkedIn</a></div></div></footer>
     </div>
 
-    <!-- Navigation Script -->
     <script>
         function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-            
-            // Scroll to top
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const t = document.getElementById('page-' + pageId);
+            if (t) t.classList.add('active');
             window.scrollTo(0, 0);
-            
-            // Update URL hash (optional, for bookmarking)
             history.pushState(null, '', '#' + pageId);
         }
-
-        // Handle browser back/forward
         window.addEventListener('popstate', function() {
             const hash = window.location.hash.replace('#', '') || 'home';
-            const targetPage = document.getElementById('page-' + hash);
-            if (targetPage) {
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                });
-                targetPage.classList.add('active');
-            }
+            const t = document.getElementById('page-' + hash);
+            if (t) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); t.classList.add('active'); }
         });
-
-        // Handle initial hash on page load
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.replace('#', '');
-            if (hash && document.getElementById('page-' + hash)) {
-                showPage(hash);
-            }
+            if (hash && document.getElementById('page-' + hash)) showPage(hash);
         });
     </script>
 </body>
